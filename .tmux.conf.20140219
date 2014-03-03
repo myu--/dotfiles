@@ -1,0 +1,107 @@
+###
+### prefix
+###
+set-option -g prefix C-q
+bind-key C-q send-prefix
+unbind-key C-b
+
+
+###
+### bind-key
+###
+
+# window
+bind-key C-z last-window
+bind-key C-n next-window
+bind-key C-p previous-window
+bind-key C-c new-window -a
+
+# pane
+bind-key -n M-Up select-pane -U
+bind-key -n M-Down select-pane -D
+bind-key -n M-Left select-pane -L
+bind-key -n M-Right select-pane -R
+
+
+###
+### mouse
+###
+set-window-option -g mode-mouse on
+
+
+###
+### window
+###
+set-window-option -g utf8 on
+set-window-option -g mode-keys emacs
+set-option -g bell-action none
+set-option -g history-limit 10000
+set-option -g repeat-time 700
+set-option -g escape-time 0
+
+
+###
+### status
+###
+# status option
+set-option -g status-utf8 on
+set-option -g status-interval 10
+
+# status bar
+#set-option -g status-left '[%m/%d %H:%M]'
+set -g status-left '#[fg=colour000]#[bg=colour039] %m/%d %a * %H:%M '
+set-option -g status-left-length 13
+#set-option -g status-right '[#S][#T]'
+set -g status-right '#[fg=colour000]#[bg=colour226] #T '
+set-option -g status-right-length 100
+
+# terminal title
+set-option -g set-titles on
+set-option -g set-titles-string '#T'
+
+
+###
+### color
+###
+
+# status bar
+set -g status-bg colour255
+set -g status-fg colour000
+set -g message-bg colour255
+set -g message-fg colour000
+set -g pane-active-border-bg colour000
+set -g pane-active-border-fg colour255
+
+# window
+setw -g window-status-current-fg colour033
+setw -g mode-bg colour255
+setw -g mode-fg colour000
+setw -g window-status-bg colour255
+setw -g window-status-fg colour000
+setw -g window-status-current-bg colour198
+setw -g window-status-current-fg colour000
+#set-option -g status-bg white
+#set-option -g status-fg black
+#set-option -g status-left-bg white
+#set-option -g status-left-fg black
+#set-option -g status-right-bg cyan
+#set-option -g status-right-fg black
+#set-option -g pane-active-border-bg white
+#set-option -g pane-active-border-fg black
+#set-window-option -g window-status-bg white
+#set-window-option -g window-status-fg black
+#set-window-option -g window-status-current-bg cyan
+#set-window-option -g window-status-current-fg black
+
+
+# synchronize-panes
+bind-key e command-prompt -p "synchronize-panes (on/off)" "set-window-option synchronize-panes '%%'"
+
+# save display
+bind-key S capture-pane -S -10000\; save-buffer ~/tmuxlog\; delete-buffer\; run-shell "mv ~/tmuxlog ~/tmuxlog.`date +%Y%m%d_%H%M%S`"\; display-message "saved"
+
+# print date command for backup
+bind-key D send-keys "`date +%Y%m%d`"
+
+# reload config
+bind-key r source-file ~/.tmux.conf \; display-message "reloaded configuration"

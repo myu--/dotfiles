@@ -1,0 +1,10 @@
+gtags.vim
+neobundle.vim
+neocomplcache
+unite.vim
+vim-colors-solarized
+vim-scala
+vim-stylus
+vim-surround
+vimproc
+vimshell
